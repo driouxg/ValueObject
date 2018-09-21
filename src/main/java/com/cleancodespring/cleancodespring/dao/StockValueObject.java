@@ -1,9 +1,8 @@
 package com.cleancodespring.cleancodespring.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public final class StockValueObject extends ValueObject {
+public class StockValueObject extends ValueObject {
 
   private StockName stockName;
   private float stockPrice;
@@ -14,14 +13,6 @@ public final class StockValueObject extends ValueObject {
     this.stockName = stockName;
     this.stockPrice = stockPrice;
     this.details = details;
-  }
-
-  protected Iterable<Object> GetEqualityComponents() {
-    return new ArrayList<Object>() {{
-      add(stockName);
-      add(stockPrice);
-      add(details);
-    }};
   }
 
   public StockName getStockName() {

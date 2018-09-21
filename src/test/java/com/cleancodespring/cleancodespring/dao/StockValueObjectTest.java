@@ -42,7 +42,7 @@ public class StockValueObjectTest {
   }
 
   @Test
-  public void Equals_TwoDifferentObjects_IsFalse() {
+  public void Equals_TwoDifferentStockNames_IsFalse() {
     StockName stockName1 = new StockName("name1");
     StockName stockName2 = new StockName("name2");
     List<StockName> list = new ArrayList<StockName>() {{

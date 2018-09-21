@@ -23,6 +23,17 @@ public abstract class ValueObject {
     return list;
   }
 
+  private Iterable<Field> GetFields() {
+    List<Field> list = new ArrayList<>();
+
+    for (Field f : getClass().getDeclaredFields()) {
+      f.setAccessible(true);
+      list.add(f);
+    }
+
+    return list;
+  }
+
   @Override
   public boolean equals(Object object) {
     if (this == object) {
@@ -44,14 +55,16 @@ public abstract class ValueObject {
   public int hashCode() {
     return Objects.hash(GetEqualityComponents());
   }
-
-  // TODO: Figure out a way to get the variable names and associate them with their
-  // corresponding values
+  
   public String toString() {
     final ToStringHelper helper = MoreObjects.toStringHelper(this);
 
-    for (Object o : GetEqualityComponents()) {
-      helper.add("value", o.toString());
+    for (Field o : GetFields()) {
+      try {
+        helper.add(o.getName(), o.get(this).toString());
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
     }
     return helper.toString();
   }
